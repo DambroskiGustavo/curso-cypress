@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-/// <reference types="cypress" />
-
 /* Validações de elementos por texto */
 describe('Worj with basic elements', () => { 
     it.only('Text...', () => {
