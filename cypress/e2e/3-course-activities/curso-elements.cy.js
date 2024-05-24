@@ -88,10 +88,16 @@ describe('Work with basic elements', () => {
             
     })
     
-    it.only('Combo', () => {
+    it('Combo', () => {
         cy.get('[data-test="dataEscolaridade"]')
             .select('1graucomp') // no select, é possível selecionar o valor visível ou o valor do campo (código)
             .should('have.value', '1graucomp') // no should, só é possível validar o valor do campo (código)
+    })
+
+    it.only('Combo multiplo', () => {
+        cy.get('[data-testid="dataEsportes"]')
+            .select(['natacao', 'Corrida', 'nada']) // via array, o select deve ser feito pelo 'value', não pela string visível
+            
     })
 
 })        
