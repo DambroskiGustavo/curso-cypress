@@ -53,7 +53,7 @@ describe('Work with basic elements', () => {
         
     })
 
-    it.only('Radiobutton', () => {
+    it('Radiobutton', () => {
         cy.get('#formSexoFem')
             .click()
             .should('be.checked') // be.checked = garantir que o campo selecionado está checado
@@ -64,7 +64,29 @@ describe('Work with basic elements', () => {
         cy.get("[name='formSexo']")
             .should('have.length', 2)
 
-        
     })
+
+    it.only('Checkbox', () => {
+        cy.get('#formComidaPizza')
+        .click()
+        .should('be.checked')
+
+        cy.get('[name=formComidaFavorita]')
+            .click({multiple: true}) // {multiple: true} = opção de seleção de todos os valores disponíveis em um grupo
+
+        cy.get('#formComidaPizza')
+            .should('not.be.checked')
+        
+        cy.get('#formComidaCarne')
+            .should('be.checked')
+        
+        cy.get('#formComidaFrango')
+            .should('be.checked')
+
+        cy.get('#formComidaVegetariana')
+            .should('be.checked')
+            
+    })
+    
 
 })        
