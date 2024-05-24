@@ -30,7 +30,7 @@ describe('Work with basic elements', () => {
         cy.get('#resultado').should('have.text', 'Voltou!')
     })
 
-    it.only('TextFields', () => {
+    it('TextFields', () => {
         cy.get('#formNome')
             .type('Cypress test') // type = comando de escrever
             .should('have.value', 'Cypress test') // "value" para textos
@@ -50,8 +50,21 @@ describe('Work with basic elements', () => {
             .clear()
             .type('Erro{selectall}acerto', {delay:100}) // {delay:100} = comando de delay no comando (type)
             .should('have.value','acerto')
+        
+    })
 
-            
+    it.only('Radiobutton', () => {
+        cy.get('#formSexoFem')
+            .click()
+            .should('be.checked') // be.checked = garantir que o campo selecionado está checado
+
+        cy.get('#formSexoMasc')
+            .should('not.be.checked') // not.be.checked = garante que que o campo não está selecionado / checado
+
+        cy.get("[name='formSexo']")
+            .should('have.length', 2)
+
+        
     })
 
 })        
