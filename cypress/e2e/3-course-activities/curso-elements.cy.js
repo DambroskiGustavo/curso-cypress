@@ -66,7 +66,7 @@ describe('Work with basic elements', () => {
 
     })
 
-    it.only('Checkbox', () => {
+    it('Checkbox', () => {
         cy.get('#formComidaPizza')
         .click()
         .should('be.checked')
@@ -88,5 +88,10 @@ describe('Work with basic elements', () => {
             
     })
     
+    it.only('Combo', () => {
+        cy.get('[data-test="dataEscolaridade"]')
+            .select('1graucomp') // no select, é possível selecionar o valor visível ou o valor do campo (código)
+            .should('have.value', '1graucomp') // no should, só é possível validar o valor do campo (código)
+    })
 
 })        
