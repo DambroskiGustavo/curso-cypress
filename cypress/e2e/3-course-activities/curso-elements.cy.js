@@ -30,4 +30,28 @@ describe('Work with basic elements', () => {
         cy.get('#resultado').should('have.text', 'Voltou!')
     })
 
+    it.only('TextFields', () => {
+        cy.get('#formNome')
+            .type('Cypress test') // type = comando de escrever
+            .should('have.value', 'Cypress test') // "value" para textos
+        
+        cy.get('#elementosForm\\:sugestoes') // \\para interpretar corretamente, sempre que tiver ":" use o \\ antes
+            .type('textarea')
+            .should('have.value', 'textarea')
+
+        cy.get('#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6) > input')
+            .type('???')
+
+        cy.get('[data-cy="dataSobrenome"]')
+            .type('Teste12345{backspace}{backspace}') // {backspace} = o comando irá apagar a última letra em order final
+            .should('have.value', 'Teste123')  
+
+        cy.get('#elementosForm\\:sugestoes')
+            .clear()
+            .type('Erro{selectall}acerto', {delay:100}) // {delay:100} = comando de delay no comando (type)
+            .should('have.value','acerto')
+
+            
+    })
+
 })        
