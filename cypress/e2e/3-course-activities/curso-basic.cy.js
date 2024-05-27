@@ -20,6 +20,15 @@ describe('Cypress basics', () => {
             .should('be.equal', 'Campo de Treinamento')
             .should('contain','Campo')
 
+        /* tanto then quanto should tratam promisses */
+        cy.title().then(title => {
+            console.log(title)
+        })
+
+        cy.title().should(title => {
+            console.log(title)
+        })
+
         //TODO imprimir o log no console
         //TODO escrever o log em um campo de texto
     })
