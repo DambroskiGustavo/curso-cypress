@@ -97,7 +97,7 @@ describe('Work with basic elements', () => {
     it.only('Combo multiplo', () => {
         cy.get('[data-testid="dataEsportes"]')
             .select(['natacao', 'Corrida', 'nada']) // via array, o select deve ser feito pelo 'value', não pela string visível
-            
+
     })
 
 })        
