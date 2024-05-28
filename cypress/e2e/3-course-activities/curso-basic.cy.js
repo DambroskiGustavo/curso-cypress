@@ -14,23 +14,29 @@ describe('Cypress basics', () => {
         cy.title().should('be.equal', 'Campo de Treinamento') // should (deve) + be equal = ser igual
         cy.title().should('contain', 'Campo') //  should (deve) + contain = deve conter
             // .debug() = usa o debug do console para depurar o código
-        
+
         /* Uso de forma mais "estruturada" e "legível" */
         cy.title()
             .should('be.equal', 'Campo de Treinamento')
             .should('contain','Campo')
 
-        /* tanto then quanto should tratam promisses */
+        let syncTitle
+
         cy.title().then(title => {
-            console.log(title)
-        })
+                console.log(title)
+            
+        cy.get('#formNome').type('Campo de Treinamento')
 
-        cy.title().should(title => {
-            console.log(title)
-        })
+        syncTitle = title
+        }) 
 
-        //TODO imprimir o log no console
-        //TODO escrever o log em um campo de texto
+        cy.get('[data-cy="dataSobrenome"]').then($el => {
+            $el.val(syncTitle)
+        })
+    
+        cy.get('#elementosForm\\:sugestoes').then($el => {
+            cy.wrap($el).type(syncTitle)
+        })
     })
 
     it('Should find and interact with an element', () => {
