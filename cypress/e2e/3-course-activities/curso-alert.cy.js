@@ -19,11 +19,38 @@ describe('Work with alerts...', () => {
         })
     })
     // método para validar mensagens de alert no navegador com dados mokados
-    it.only('Alert com mock', () => {
+    it('Alert com mock', () => {
         const stub = cy.stub().as('alerta')
         cy.on('window:alert', stub)
         cy.get('#alert').click().then(() => {
             expect(stub.getCall(0)).to.be.calledWith('Alert Simples')
         })
+    })
+    // método para validar o confirm + o alert, em caso positivo
+    it('Confirm', () => {
+        cy.get('#confirm')
+            .click()
+        cy.on('window:confirm', msg => {
+            expect(msg).to.be.equal('Confirm Simples')
+        })
+        cy.on('window:alert', msg => {
+            expect(msg).to.be.equal('Confirmado')
+      })
+        cy.get('#confirm')
+            .click()
+    })
+    // método para validar o confirm + o alert, em caso negativo
+    it.only('Deny', () => {
+        cy.get('#confirm')
+            .click()
+        cy.on('window:confirm', msg => {
+            expect(msg).to.be.equal('Confirm Simples')
+            return false
+        })
+        cy.on('window:alert', msg => {
+            expect(msg).to.be.equal('Negado')
+      })
+        cy.get('#confirm')
+            .click()
     })
 })
