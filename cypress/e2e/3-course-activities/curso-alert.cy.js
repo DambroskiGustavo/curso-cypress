@@ -70,7 +70,7 @@ describe('Work with alerts...', () => {
     })
 
     it.only('Validando mensagens', () => {
-        
+        // modelo mais "correto" para simular o cenário do DESAFIO 1 do curto
         const stub = cy.stub().as('alerta')
         cy.on('window:alert', stub)
         
