@@ -16,5 +16,15 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// import do plugin do xpath (segundo o documento do cypress, está depricado... ou seja, descontinuado)
+require('cypress-xpath')
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Definição de ordernação de bsuca dos selectos
+// Default Selector Priority: https://docs.cypress.io/api/cypress-api/selector-playground-api#__docusaurus_skipToContent_fallback
+Cypress.SelectorPlayground.defaults({
+    selectorPriority: ['data-wc', 'id', 'class', 'attributes', 'data-cy', 'data-test', 'data-testid', 'data-qa', 'id', 'class', 'tag', 'attributes', 'nth-child'],
+  })
+
