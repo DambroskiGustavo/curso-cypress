@@ -10,13 +10,16 @@ describe('Work with alerts...', () => {
         cy.reload()
     })
     // método para validar mensagens de alert no navegador
-    it('Alert', () => {
-        cy.get('#alert')
-            .click()
-        cy.on('window:alert', msg => {
-            console.log(msg)
-            expect(msg).to.be.equal('Alert Simples')
-        })
+    it.only('Alert', () => {
+        //cy.get('#alert')
+        //    .click()
+        //cy.on('window:alert', msg => {
+        //    console.log(msg)
+        //    expect(msg).to.be.equal('Alert Simples')
+        //})
+
+        cy.clickAlert('#alert', 'Alert Simples')
+
     })
     // método para validar mensagens de alert no navegador com dados mokados
     it('Alert com mock', () => {
@@ -69,7 +72,7 @@ describe('Work with alerts...', () => {
             .click()
     })
 
-    it.only('Validando mensagens', () => {
+    it('Validando mensagens', () => {
         // modelo mais "correto" para simular o cenário do DESAFIO 1 do curto
         const stub = cy.stub().as('alerta')
         cy.on('window:alert', stub)
