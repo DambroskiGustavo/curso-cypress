@@ -25,6 +25,6 @@ require('cypress-xpath')
 // Definição de ordernação de bsuca dos selectos
 // Default Selector Priority: https://docs.cypress.io/api/cypress-api/selector-playground-api#__docusaurus_skipToContent_fallback
 Cypress.SelectorPlayground.defaults({
-    selectorPriority: ['data-wc', 'id', 'class', 'attributes', 'data-cy', 'data-test', 'data-testid', 'data-qa', 'id', 'class', 'tag', 'attributes', 'nth-child'],
-  })
+    selectorPriority: ['data-wc', 'data-cy', 'data-test', 'data-testid', 'id', 'class', 'attributes', 'data-qa', 'id', 'class', 'tag', 'attributes', 'nth-child'],
+})
 
