@@ -3,25 +3,25 @@
 import loc from '../../../support/locators'
 
 describe('should test at a functional level', () => {
-    beforeEach(() => {
-        cy.visit('https://barrigareact.wcaquino.me/')
-        cy.get(loc.LOGIN.USER).type('gustavodambroski@gmail.com')
-        cy.get(loc.LOGIN.PASSWORD).type('gustavo621')
-        cy.get(loc.LOGIN.BTN_LOGIN).click()
-        cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
+    before(() => {
+        cy.login('gustavodambroski@gmail.com', 'gustavo621')
+        cy.resetApp()
+        // cy.visit('https://barrigareact.wcaquino.me/')
+        // cy.get(loc.LOGIN.USER).type('gustavodambroski@gmail.com')
+        // cy.get(loc.LOGIN.PASSWORD).type('gustavo621')
+        // cy.get(loc.LOGIN.BTN_LOGIN).click()
+        // cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
     })
 
-    it('Should create an account', () => {
-        // Criando uma conta
+    it('Should create and update an account', () => {
+        /*** Criando uma conta ***/
         cy.get(loc.MENU.SETTINGS).click()
         cy.get(loc.MENU.CONTAS).click()
         cy.get(loc.CONTAS.NOME).type('Conta de teste')
         cy.get(loc.CONTAS.BTN_SALVAR).click()
         cy.get(loc.MESSAGE).should('contain', 'Conta inserida com sucesso!')
-    })
-
-    it('Should update an account', () => {
-        // Alterando uma conta
+    
+        /*** Alterando uma conta ***/
         cy.get(loc.MENU.SETTINGS).click()
         cy.get(loc.MENU.CONTAS).click()
         cy.xpath(loc.CONTAS.XP_BTN_ALTERAR).click()
