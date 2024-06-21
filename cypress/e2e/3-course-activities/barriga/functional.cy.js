@@ -1,29 +1,19 @@
 /// <reference types="cypress" />
 
 import loc from '../../../support/locators'
+import '../../../support/commandsContas'
 
 describe('should test at a functional level', () => {
     before(() => {
         cy.login('gustavodambroski@gmail.com', 'gustavo621')
         cy.resetApp()
-        // cy.visit('https://barrigareact.wcaquino.me/')
-        // cy.get(loc.LOGIN.USER).type('gustavodambroski@gmail.com')
-        // cy.get(loc.LOGIN.PASSWORD).type('gustavo621')
-        // cy.get(loc.LOGIN.BTN_LOGIN).click()
-        // cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
     })
 
     it('Should create and update an account', () => {
-        /*** Criando uma conta ***/
-        cy.get(loc.MENU.SETTINGS).click()
-        cy.get(loc.MENU.CONTAS).click()
-        cy.get(loc.CONTAS.NOME).type('Conta de teste')
-        cy.get(loc.CONTAS.BTN_SALVAR).click()
+        cy.acessarMenuConta()
+        cy.inserirConta('Conta de teste')
         cy.get(loc.MESSAGE).should('contain', 'Conta inserida com sucesso!')
-    
-        /*** Alterando uma conta ***/
-        cy.get(loc.MENU.SETTINGS).click()
-        cy.get(loc.MENU.CONTAS).click()
+        cy.acessarMenuConta()
         cy.xpath(loc.CONTAS.XP_BTN_ALTERAR).click()
         cy.get(loc.CONTAS.NOME)
             .clear()    
