@@ -42,6 +42,11 @@ Cypress.Commands.add('login', (user, passwd) => {
     cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
 })
 
+Cypress.Commands.add('logout', () => {
+    cy.get(loc.MENU.SETTINGS).click()
+    cy.get(loc.MENU.BTN_LOGOUT).click()
+}) 
+
 Cypress.Commands.add('resetApp', () => {
     cy.get(loc.MENU.SETTINGS).click()
     cy.get(loc.MENU.RESET).click()
