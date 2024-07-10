@@ -32,7 +32,7 @@ describe('should test at a functional level', () => {
     })
   })
 
-  it.only('Should update an account', () => {
+  it('Should update an account', () => {
     cy.request({
       method: 'GET',
       url: '/contas',
@@ -42,7 +42,7 @@ describe('should test at a functional level', () => {
       }
     }).then(res => {
       cy.request({
-        url: `https://barrigarest.wcaquino.me/contas/${res.body[0].id}`,
+        url: `/contas/${res.body[0].id}`,
         method: 'PUT',
         headers: { Authorization: `JWT ${token}`},
         body: {
@@ -50,11 +50,26 @@ describe('should test at a functional level', () => {
         }
       }).as('response')
     })
+    
     cy.get('@response').its('status').should('to.equal', 200)
   })
 
-  it('should not create an account with same name', () => {
+  it.only('should not create an account with same name', () => {
+    cy.request({
+      method: 'POST',
+      headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
+      url: '/contas',
+      body: {
+        nome: 'Conta mesmo nome'
+          },
+          failOnStatusCode: false
+      }).as('response')
 
+    cy.get('@response').then(res =>{
+      console.log(res)
+        expect(res.status).to.be.equal(400)
+        expect(res.body.error).to.be.equal('Já existe uma conta com esse nome!')
+    })
   })
 
   it('Should create a transaction', () => {
