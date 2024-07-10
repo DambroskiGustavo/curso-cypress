@@ -1,8 +1,13 @@
 /// <reference types="cypress" />
 
 describe('should test at a functional level', () => {
+  let token
+
   before('', () => {
-    // cy.login('gustavodambroski@gmail.com', 'gustavo621')
+    cy.getToken('gustavodambroski@gmail.com', 'gustavo621')
+      .then(tkn => {
+        token = tkn
+      })
   })
 
   beforeEach('', () => {
@@ -13,23 +18,12 @@ describe('should test at a functional level', () => {
     // método utilizado para requisições de API, utilizando Cypress (cy.request)
     cy.request({
         method: 'POST',
-        url: 'https://barrigarest.wcaquino.me/signin',
-        body: { //objeto na requisição*
-            email: "gustavodambroski@gmail.com",
-            redirecionar: false,
-            senha: "gustavo621"
-        }
-    }).its('body.token').should('not.be.empty')
-    .then(token => {
-        cy.request({
-            method: 'POST',
-            headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
-            url: 'https://barrigarest.wcaquino.me/contas',
-            body: {
-                nome: 'Conta via rest'
+        headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
+        url: 'https://barrigarest.wcaquino.me/contas',
+        body: {
+          nome: 'Conta via rest'
             }
         }).as('response')
-    })
     cy.get('@response').then(res =>{
         expect(res.status).to.be.equal(201)
         expect(res.body).to.have.property('id')
