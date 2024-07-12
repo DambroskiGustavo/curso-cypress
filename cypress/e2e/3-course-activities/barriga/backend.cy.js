@@ -16,7 +16,7 @@ describe('should test at a functional level', () => {
     cy.resetRest()
   })
 
-  it('Should create an account', () => {
+  it.only('Should create an account', () => {
     // método utilizado para requisições de API, utilizando Cypress (cy.request)
     cy.request({
         method: 'POST',
