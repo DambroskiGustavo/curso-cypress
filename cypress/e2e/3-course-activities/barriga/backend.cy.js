@@ -91,7 +91,7 @@ describe('should test at a functional level', () => {
     cy.get('@response').its('body.id').should('exist')
   })
 
-  it('Should get balance', () => {
+  it.only('Should get balance', () => {
 
   })
 
