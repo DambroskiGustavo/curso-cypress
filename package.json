@@ -1,18 +1,26 @@
 {
   "name": "curso-cypress",
   "version": "1.0.0",
-  "description": "",
+  "description": "* Fonte: Udemy\r * Criado e adminsitrado por: Francisco Wagner Costa Aquino\r * Link: https://www.udemy.com/course/testes-cypress/?couponCode=KEEPLEARNING\r * 13 seções • 91 aulas • Duração total: 14h 18m",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gustavo Dambroski",
   "license": "ISC",
   "dependencies": {
     "cypress": "^13.12.0",
     "cypress-xpath": "^2.0.1",
     "dayjs": "^1.11.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DambroskiGustavo/curso-cypress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DambroskiGustavo/curso-cypress/issues"
+  },
+  "homepage": "https://github.com/DambroskiGustavo/curso-cypress#readme"
 }
