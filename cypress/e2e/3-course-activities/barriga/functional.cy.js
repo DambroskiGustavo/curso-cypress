@@ -68,8 +68,11 @@ describe('should test at a functional level', () => {
         cy.get(loc.MENU.EXTRATO).click()
         cy.xpath(loc.EXTRATO.FN_XP_ALTERAR_ELEMENTO('Movimentacao 1, calculo saldo')).click()
         cy.get(loc.MOVIMENTACAO.DESCRICAO).should('have.value', 'Movimentacao 1, calculo saldo')
+        cy.wait(1000)
         cy.get(loc.MOVIMENTACAO.STATUS).click()
+        cy.wait(1000)
         cy.get(loc.MOVIMENTACAO.BTN_SALVAR).click()
+        cy.wait(1000)
         cy.get(loc.MESSAGE).should('contain', 'sucesso')
         
         /*** Checando novamente o saldo da conta alterada ***/
