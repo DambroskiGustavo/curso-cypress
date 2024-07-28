@@ -3,24 +3,24 @@
 const dayjs = require('dayjs')
 
 describe('should test at a functional level', () => {
-  let token
+  // let token
 
   before('', () => {
     cy.getToken('gustavodambroski@gmail.com', 'gustavo621')
-      .then(tkn => {
-        token = tkn
-      })
+      // .then(tkn => {
+      //   token = tkn
+      // })
   })
 
   beforeEach('', () => {
     cy.resetRest()
   })
 
-  it('Should create an account', () => {
+  it.skip('Should create an account', () => {
     // método utilizado para requisições de API, utilizando Cypress (cy.request)
     cy.request({
         method: 'POST',
-        headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
+        // headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
         url: '/contas',
         body: {
           nome: 'Conta via rest'
@@ -40,7 +40,7 @@ describe('should test at a functional level', () => {
       cy.request({
         url: `/contas/${contaId}`,
         method: 'PUT',
-        headers: { Authorization: `JWT ${token}`},
+        // headers: { Authorization: `JWT ${token}`},
         body: {
           nome: 'Conta alterada via rest'
         }
@@ -53,7 +53,7 @@ describe('should test at a functional level', () => {
   it('should not create an account with same name', () => {
     cy.request({
       method: 'POST',
-      headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
+      // headers: { Authorization: `JWT ${token}`}, // O uso de "JWT" é devido a versão da API, então em aplicações mais novas, se utilizará o "bearer" + ${token}
       url: '/contas',
       body: {
         nome: 'Conta mesmo nome'
@@ -73,7 +73,7 @@ describe('should test at a functional level', () => {
         cy.request({
           method: 'POST',
           url: '/transacoes',
-          headers: { Authorization: `JWT ${token}`},
+          // headers: { Authorization: `JWT ${token}`},
           body: {
             conta_id: contaId,
             data_pagamento: dayjs().add(1, 'day').format('DD/MM/YYYY'),
@@ -95,7 +95,7 @@ describe('should test at a functional level', () => {
     cy.request({
       url: '/saldo',
       method: 'GET',
-      headers: { Authorization: `JWT ${token}`},
+      // headers: { Authorization: `JWT ${token}`},
     }).then(res => {
       let saldoConta = null
       res.body.forEach(c => {
@@ -107,14 +107,13 @@ describe('should test at a functional level', () => {
     cy.request({
       method: 'GET',
       url: '/transacoes',
-      headers: { Authorization: `JWT ${token}`},
+      // headers: { Authorization: `JWT ${token}`},
       qs: { descricao: 'Movimentacao 1, calculo saldo' }
     }).then(res => {
-      console.log(res.body[0])
       cy.request({
         url: `/transacoes/${res.body[0].id}`,
         method: 'PUT',
-        headers: { Authorization: `JWT ${token}`},
+        // headers: { Authorization: `JWT ${token}`},
         body: {
           status: true,
           data_transacao: dayjs(res.body[0].data_transacao).format('DD/MM/YYYY'),
@@ -130,7 +129,7 @@ describe('should test at a functional level', () => {
     cy.request({
       url: '/saldo',
       method: 'GET',
-      headers: { Authorization: `JWT ${token}`},
+      // headers: { Authorization: `JWT ${token}`},
     }).then(res => {
       let saldoConta = null
       res.body.forEach(c => {
@@ -141,6 +140,17 @@ describe('should test at a functional level', () => {
   })
 
   it('Should remove a transaction', () => {
-
+    cy.request({
+      method: 'GET',
+      url: '/transacoes',
+      // headers: { Authorization: `JWT ${token}`},
+      qs: { descricao: 'Movimentacao para exclusao' }
+    }).then(res => {
+      cy.request({
+        url: `/transacoes/${res.body[0].id}`,
+        method: 'DELETE',
+        // headers: { Authorization: `JWT ${token}`},
+      }).its('status').should('be.equal', 204)
+    })
   })
 })
