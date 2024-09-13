@@ -11,7 +11,7 @@
   "author": "Gustavo Dambroski",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.12.0",
+    "cypress": "^13.14.2",
     "cypress-xpath": "^2.0.1",
     "dayjs": "^1.11.11"
   },
